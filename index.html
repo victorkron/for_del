@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./src/css/style.css">
+  <title>Document</title>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+
+  <div id="app">
+
+  </div>
+
+
+  <script type="text/babel">
+    function callback() {
+      console.log('ReactDOM.render is called');
+    }
+
+    class Button extends React.Component {
+      constructor(props) {
+        super(props);
+        this.name = props.name;
+        this.className = "block";
+        this.state = {
+          picked: false,
+        };
+      }
+
+      handle = () => {
+        console.log('handle');
+        if (this.state.picked == false) {
+          this.setState({
+            picked: true,
+          });
+        } else {
+          this.setState({
+            picked: false,
+          });
+        }
+
+      }
+
+      componentDidMount() {
+        this.setState({
+          picked: true,
+        });
+      }
+
+      componentDidUpdate() {
+        console.log('didUp');
+        if (this.state.picked == true) {
+          this.className = "block colorBG";
+        } else {
+          this.className = "block";
+        }
+      }
+
+      // componentWillUnmount() {
+      //   alert(deletd);
+      // }
+
+
+      render() {
+        return <div className={this.className} onClick={this.handle}></div>;
+      }
+    }
+
+    let element = <div className="wrapper"><Button /><Button /><Button /><Button /><Button /><Button /><Button /><Button /><Button /></div>;
+
+    let button = ReactDOM.render(
+      element, document.querySelector('#app'), callback
+    );
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>
